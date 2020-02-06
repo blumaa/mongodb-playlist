@@ -4,8 +4,11 @@ const OfficeChar = require("../models/officechars");
 //describe tests
 describe("Finding Records", function() {
   //create tests
+
+  let char;
+
   beforeEach(function(done){
-      const char = new OfficeChar({
+      char = new OfficeChar({
         name: "Jim"
       });
       char.save().then(function() {
@@ -23,6 +26,16 @@ describe("Finding Records", function() {
       done()
     })
   });
+
+
+  it("Finds one record by ID from the DB", function(done) {
+    OfficeChar.findOne({ _id: char._id}).then(function(result){
+      assert(result._id.toString() === char._id.toString());
+      done()
+    })
+  });
+
+
 
   //next test
 });
