@@ -9,7 +9,8 @@ describe("Updating Records", function() {
 
   beforeEach(function(done){
       char = new OfficeChar({
-        name: "Jim"
+        name: "Jim",
+        age: 25
       });
       char.save().then(function() {
         done();
@@ -21,6 +22,15 @@ describe("Updating Records", function() {
     OfficeChar.findOneAndUpdate({name:'Jim'}, {name:'Pam'}).then(function(){
       OfficeChar.findOne({_id: char._id}).then(function(result){
         assert(result.name==='Pam')
+        done()
+      })
+    })
+  });
+
+  it("Increments the age by 1", function(done) {
+    OfficeChar.update({}, {$inc: {age:1}}).then(function(){
+      OfficeChar.findOne({name: 'Jim'}).then(function(record){
+        assert(record.age === 26)
         done()
       })
     })
