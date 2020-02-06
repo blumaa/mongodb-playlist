@@ -1,10 +1,18 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 //conect to mongodb
 
-mongoose.connect('mongodb://localhost/testaroo')
+//ES6 Promises
+mongoose.Promise = global.Promise;
 
-mongoose.connection.once('open', function(){
-  console.log('connection has been made');
-}).on('error', function(error){
-  console.log('connection error:', error);
-})
+mongoose.connect("mongodb://localhost/testaroo", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+mongoose.connection
+  .once("open", function() {
+    console.log("connection has been made");
+  })
+  .on("error", function(error) {
+    console.log("connection error:", error);
+  });
