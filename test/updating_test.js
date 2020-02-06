@@ -2,7 +2,7 @@ const assert = require("assert");
 const OfficeChar = require("../models/officechars");
 
 //describe tests
-describe("Deleting Records", function() {
+describe("Updating Records", function() {
   //create tests
 
   let char;
@@ -17,11 +17,11 @@ describe("Deleting Records", function() {
   })
 
 
-  it("Deletes one record from the DB", function(done) {
-    OfficeChar.findOneAndRemove({name: 'Jim'}).then(function(){
-      OfficeChar.findOne({name: 'Jim'}).then(function(result){
-        assert(result===null)
-        done();
+  it("Update one record in the DB", function(done) {
+    OfficeChar.findOneAndUpdate({name:'Jim'}, {name:'Pam'}).then(function(){
+      OfficeChar.findOne({_id: char._id}).then(function(result){
+        assert(result.name==='Pam')
+        done()
       })
     })
   });

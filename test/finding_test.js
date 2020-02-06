@@ -12,7 +12,6 @@ describe("Finding Records", function() {
         name: "Jim"
       });
       char.save().then(function() {
-        assert(char.isNew === false);
         done();
       });
   })
